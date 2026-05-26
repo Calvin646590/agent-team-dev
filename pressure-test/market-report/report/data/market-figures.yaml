@@ -1,0 +1,139 @@
+# AI 芯片市场规模数据
+# 数据说明：本文件所有数据均为示例数据（Illustrative Data），
+# 基于公开行业报告的量级估算，仅供报告结构演示用途。
+# 如需正式引用，请替换为 IDC、Gartner、McKinsey 等机构最新发布数据。
+
+metadata:
+  data_type: "示例数据（Illustrative Data）"
+  currency: "USD"
+  unit: "十亿美元（Billion USD）"
+  sources_reference:
+    - "IDC Worldwide Semiconductor Tracker（参考结构，数值为示例）"
+    - "Gartner Semiconductor Forecast（参考结构，数值为示例）"
+    - "McKinsey Global Institute AI Chips Report（参考结构，数值为示例）"
+  last_updated: "2026-05-26"
+
+# -----------------------------------------------
+# 一、全球 AI 芯片市场总规模（2023–2025）
+# -----------------------------------------------
+global_market_total:
+  description: "全球 AI 芯片市场年度总规模及同比增速"
+  data:
+    - year: 2023
+      market_size_bn_usd: 67.1
+      yoy_growth_pct: 35.2
+      notes: "示例数据；生成式 AI 爆发带动 GPU 需求急剧上升"
+    - year: 2024
+      market_size_bn_usd: 108.5
+      yoy_growth_pct: 61.7
+      notes: "示例数据；云厂商大规模 AI 基础设施投资驱动"
+    - year: 2025
+      market_size_bn_usd: 165.2
+      yoy_growth_pct: 52.3
+      notes: "示例数据；推理需求崛起，市场结构向多元化演进"
+
+# -----------------------------------------------
+# 二、细分市场 — 训练芯片 vs 推理芯片
+# -----------------------------------------------
+segment_by_workload:
+  description: "按工作负载类型拆分：训练（Training）vs 推理（Inference）"
+  data:
+    - year: 2023
+      training_bn_usd: 46.9
+      training_share_pct: 69.9
+      inference_bn_usd: 20.2
+      inference_share_pct: 30.1
+      notes: "示例数据；训练市场由大模型预训练主导"
+    - year: 2024
+      training_bn_usd: 68.4
+      training_share_pct: 63.0
+      inference_bn_usd: 40.1
+      inference_share_pct: 37.0
+      notes: "示例数据；推理占比加速提升，边缘推理开始放量"
+    - year: 2025
+      training_bn_usd: 91.9
+      training_share_pct: 55.6
+      inference_bn_usd: 73.3
+      inference_share_pct: 44.4
+      notes: "示例数据；推理市场快速追赶，预计 2026–2027 年与训练规模趋于均衡"
+
+# -----------------------------------------------
+# 三、细分市场 — 云端 vs 边缘
+# -----------------------------------------------
+segment_by_deployment:
+  description: "按部署位置拆分：云端数据中心（Cloud）vs 边缘/终端（Edge/On-device）"
+  data:
+    - year: 2023
+      cloud_bn_usd: 54.9
+      cloud_share_pct: 81.8
+      edge_bn_usd: 12.2
+      edge_share_pct: 18.2
+      notes: "示例数据；云端算力集中，边缘尚处于起步阶段"
+    - year: 2024
+      cloud_bn_usd: 83.5
+      cloud_share_pct: 76.9
+      edge_bn_usd: 25.0
+      edge_share_pct: 23.1
+      notes: "示例数据；AI PC、AI 手机带动边缘芯片需求增长"
+    - year: 2025
+      cloud_bn_usd: 118.0
+      cloud_share_pct: 71.4
+      edge_bn_usd: 47.2
+      edge_share_pct: 28.6
+      notes: "示例数据；边缘市场三年 CAGR 约 97%，增速远超云端"
+
+# -----------------------------------------------
+# 四、主要地区市场份额（2025 年）
+# -----------------------------------------------
+regional_breakdown_2025:
+  description: "2025 年各主要地区 AI 芯片市场规模与份额（示例数据）"
+  total_market_bn_usd: 165.2
+  regions:
+    - region: "北美"
+      market_size_bn_usd: 85.8
+      share_pct: 51.9
+      key_drivers:
+        - "超大规模云服务商（Hyperscalers）持续扩张"
+        - "NVIDIA、AMD、Intel 等本土芯片厂商主导供应链"
+        - "联邦政府 AI 投资政策支持"
+      notes: "示例数据"
+    - region: "亚太"
+      market_size_bn_usd: 57.8
+      share_pct: 35.0
+      key_drivers:
+        - "中国本土 AI 大模型及云计算高速增长"
+        - "日韩半导体制造与封测产业配套优势"
+        - "东南亚数字基础设施建设提速"
+      notes: "示例数据"
+    - region: "欧洲"
+      market_size_bn_usd: 16.5
+      share_pct: 10.0
+      key_drivers:
+        - "欧盟 AI Act 监管框架催生合规芯片需求"
+        - "工业 AI 与汽车智能化应用牵引"
+        - "主权 AI 战略推动区域数据中心建设"
+      notes: "示例数据"
+    - region: "其他地区"
+      market_size_bn_usd: 5.1
+      share_pct: 3.1
+      key_drivers:
+        - "中东主权 AI 基金推动数据中心投资"
+        - "拉美及非洲云基础设施逐步普及"
+      notes: "示例数据"
+
+# -----------------------------------------------
+# 五、关键增长驱动因素（定性）
+# -----------------------------------------------
+growth_drivers:
+  - factor: "大语言模型（LLM）规模化训练需求"
+    impact: "高"
+  - factor: "生成式 AI 应用商业化落地"
+    impact: "高"
+  - factor: "边缘 AI 与 AI PC / AI 手机普及"
+    impact: "中-高"
+  - factor: "汽车自动驾驶芯片需求增长"
+    impact: "中"
+  - factor: "主权 AI / 国产替代政策推动"
+    impact: "中"
+  - factor: "HBM 等先进封装技术成熟降本"
+    impact: "中"

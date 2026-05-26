@@ -1,0 +1,19 @@
+# macOS
+.DS_Store
+
+# Node
+node_modules/
+dist/
+*.log
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# 打包产物（应由 CI 生成）
+*.zip
+*.pkg
+*.plugin
+
+# 运行时残留（各测试项目的 .agent-team 可保留作历史记录，不排除）

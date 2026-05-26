@@ -1,0 +1,307 @@
+# AI 芯片主要市场玩家数据
+# 数据说明：所有数值均为示例数据，基于公开报道及行业估算整理，不代表实际审计数据
+# 数据基准年：2024 年
+# 最后更新：2026-05-26
+
+metadata:
+  data_type: "示例数据"
+  year: 2024
+  sources:
+    - "NVIDIA 官方技术文档及发布会（示例数据）"
+    - "AMD 官方技术白皮书（示例数据）"
+    - "Intel 官方技术文档（示例数据）"
+    - "Google Cloud 官方文档（示例数据）"
+    - "AWS re:Invent 发布会资料（示例数据）"
+    - "华为官方公告及行业媒体报道（示例数据）"
+    - "寒武纪公司公告（示例数据）"
+    - "行业分析机构综合估算（示例数据）"
+
+# -------------------------------------------------------
+# 市场份额数据（全球 AI 加速器市场，2024 年估算）
+# 数据类型：示例数据
+# -------------------------------------------------------
+market_share_global_2024:
+  unit: "百分比区间（%）"
+  note: "示例数据，基于行业报告综合估算"
+  players:
+    - name: NVIDIA
+      share_range: "70–80"
+      notes: "含 H100/H200/A100/L40S 等数据中心产品线"
+    - name: AMD
+      share_range: "8–12"
+      notes: "主要来自 MI300X 系列"
+    - name: Intel
+      share_range: "2–4"
+      notes: "Gaudi 系列，份额持续下滑"
+    - name: 华为昇腾
+      share_range: "<5"
+      notes: "主要服务中国市场，受出口管制影响全球份额低"
+    - name: 其他（含云厂商自研）
+      share_range: "3–8"
+      notes: "包含 Google TPU、AWS Trainium 内部消化部分及其他国产芯片"
+
+market_share_china_2024:
+  unit: "百分比区间（%）"
+  note: "示例数据，中国境内 AI 训练加速器市场"
+  players:
+    - name: 华为昇腾
+      share_range: "50–60"
+    - name: NVIDIA
+      share_range: "20–30"
+      notes: "受 A100/H800 出口管制影响，份额下降"
+    - name: 寒武纪
+      share_range: "3–5"
+    - name: 其他国产（燧原、壁仞等）
+      share_range: "5–10"
+    - name: AMD / Intel
+      share_range: "<5"
+
+# -------------------------------------------------------
+# 产品规格对比
+# 数据类型：示例数据
+# -------------------------------------------------------
+products:
+  - vendor: NVIDIA
+    product_line: "H 系列（Hopper 架构）"
+    models:
+      - name: H100 SXM5
+        segment: 旗舰训练
+        memory_gb: 80
+        memory_type: HBM3
+        fp16_tflops: 989
+        int8_tops: 1979
+        interconnect: "NVLink 4.0 + NVSwitch"
+        tdp_w: 700
+        process_node: "4nm（台积电）"
+        note: "示例数据"
+      - name: H200 SXM5
+        segment: 下一代旗舰训练
+        memory_gb: 141
+        memory_type: HBM3e
+        fp16_tflops: 989
+        int8_tops: 1979
+        interconnect: "NVLink 4.0"
+        tdp_w: 700
+        process_node: "4nm（台积电）"
+        note: "示例数据"
+      - name: A100 80GB
+        segment: 上一代训练主力
+        memory_gb: 80
+        memory_type: HBM2e
+        fp16_tflops: 312
+        int8_tops: 624
+        interconnect: "NVLink 3.0"
+        tdp_w: 400
+        process_node: "7nm（台积电）"
+        note: "示例数据"
+      - name: L40S
+        segment: 推理/多模态
+        memory_gb: 48
+        memory_type: GDDR6
+        fp16_tflops: 362
+        int8_tops: 733
+        interconnect: "PCIe 4.0"
+        tdp_w: 350
+        process_node: "5nm（台积电）"
+        note: "示例数据"
+
+  - vendor: AMD
+    product_line: "Instinct MI 系列"
+    models:
+      - name: MI300X
+        segment: 旗舰训练/推理
+        memory_gb: 192
+        memory_type: HBM3
+        fp16_tflops: 1307
+        int8_tops: 2614
+        interconnect: "Infinity Fabric"
+        tdp_w: 750
+        process_node: "5nm（台积电）Chiplet 架构"
+        note: "示例数据"
+      - name: MI250X
+        segment: 上一代训练
+        memory_gb: 128
+        memory_type: HBM2e
+        fp16_tflops: 383
+        int8_tops: 383
+        interconnect: "Infinity Fabric"
+        tdp_w: 560
+        process_node: "6nm（台积电）"
+        note: "示例数据"
+      - name: MI325X
+        segment: 旗舰训练/推理（迭代版）
+        memory_gb: 256
+        memory_type: HBM3e
+        fp16_tflops: 1500
+        int8_tops: 3000
+        interconnect: "Infinity Fabric"
+        tdp_w: 800
+        process_node: "5nm（台积电）"
+        note: "示例数据，部分参数为预估值"
+
+  - vendor: Intel
+    product_line: "Gaudi 系列"
+    models:
+      - name: Gaudi 3
+        segment: 训练/推理
+        memory_gb: 128
+        memory_type: HBM2e
+        fp16_tflops: 1835
+        int8_tops: 3670
+        interconnect: "以太网 RoCE / PCIe 5.0"
+        tdp_w: 600
+        process_node: "5nm（台积电）"
+        note: "示例数据"
+      - name: Gaudi 2
+        segment: 训练
+        memory_gb: 96
+        memory_type: HBM2e
+        fp16_tflops: 600
+        int8_tops: 1200
+        interconnect: "以太网 RoCE 100G"
+        tdp_w: 600
+        process_node: "7nm（台积电）"
+        note: "示例数据"
+
+  - vendor: Google
+    product_line: "TPU 系列"
+    models:
+      - name: TPU v5p
+        segment: 旗舰训练
+        memory_gb: 95
+        memory_type: HBM2e
+        bf16_tflops: 459
+        interconnect: "ICI（Inter-Chip Interconnect）"
+        tdp_w: 500
+        availability: "Google Cloud 内部及 GCP"
+        note: "示例数据，参考 Google Cloud 官方文档"
+      - name: TPU v5e
+        segment: 训练/推理均衡
+        bf16_tflops: 197
+        interconnect: "ICI"
+        availability: "Google Cloud GCP"
+        note: "示例数据"
+      - name: TPU v4
+        segment: 大规模训练
+        bf16_tflops: 275
+        interconnect: "ICI"
+        availability: "Google Cloud 内部为主"
+        note: "示例数据"
+
+  - vendor: AWS
+    product_line: "Trainium / Inferentia 系列"
+    models:
+      - name: Trainium2
+        segment: 大规模训练
+        fp8_tflops_per_chip: 830
+        interconnect: "EFA（Elastic Fabric Adapter）"
+        availability: "EC2 Trn2 实例"
+        note: "示例数据，参考 AWS 发布会资料"
+      - name: Inferentia2
+        segment: 高吞吐推理
+        fp8_tops_per_chip: 190
+        interconnect: "PCIe / EFA"
+        availability: "EC2 Inf2 实例"
+        note: "示例数据"
+
+  - vendor: 华为
+    product_line: "昇腾（Ascend）系列"
+    models:
+      - name: Ascend 910B
+        segment: 旗舰训练（量产版）
+        memory_gb: 64
+        memory_type: HBM2
+        fp16_tflops: 320
+        int8_tops: 640
+        interconnect: "HCCS 高速互联"
+        tdp_w: 400
+        process_node: "7nm（中芯国际/台积电，具体批次不确定）"
+        note: "示例数据，规格基于行业媒体报道及学术论文整理"
+      - name: Ascend 910C
+        segment: 下一代旗舰（规划中）
+        memory_gb: 64
+        memory_type: HBM2e
+        fp16_tflops: 550
+        int8_tops: 1100
+        interconnect: "HCCS"
+        process_node: "6nm（预估）"
+        note: "示例数据，部分参数为预估值，产品尚未正式发布"
+      - name: Ascend 310P
+        segment: 边缘推理
+        memory_gb: 8
+        memory_type: LPDDR
+        int8_tops: 64
+        interconnect: "PCIe 4.0"
+        note: "示例数据"
+
+  - vendor: 寒武纪
+    product_line: "思元（MLU）系列"
+    models:
+      - name: 思元 590（MLU590）
+        segment: 云端训练/推理
+        memory_gb: 64
+        memory_type: HBM2e
+        int8_tops: 256
+        fp16_tflops: 128
+        interconnect: "MLU-Link"
+        note: "示例数据，参考寒武纪官方产品页"
+      - name: 思元 370（MLU370）
+        segment: 云端推理
+        memory_gb: 24
+        memory_type: LPDDR5
+        int8_tops: 256
+        interconnect: "PCIe 4.0"
+        note: "示例数据"
+
+# -------------------------------------------------------
+# 竞争要素对比矩阵
+# 数据类型：示例数据 / 定性评估
+# -------------------------------------------------------
+competitive_factors:
+  note: "定性评估，示例数据，满分 5 分"
+  dimensions:
+    - factor: 软件生态成熟度
+      vendors:
+        NVIDIA: 5
+        AMD: 3
+        Intel: 2
+        Google_TPU: 3
+        AWS_Trainium: 2
+        华为昇腾: 3
+        寒武纪: 2
+    - factor: 互联带宽
+      vendors:
+        NVIDIA: 5
+        AMD: 4
+        Intel: 3
+        Google_TPU: 5
+        AWS_Trainium: 3
+        华为昇腾: 3
+        寒武纪: 2
+    - factor: 显存容量
+      vendors:
+        NVIDIA: 4
+        AMD: 5
+        Intel: 4
+        Google_TPU: 3
+        AWS_Trainium: 3
+        华为昇腾: 3
+        寒武纪: 2
+    - factor: 性价比
+      vendors:
+        NVIDIA: 2
+        AMD: 3
+        Intel: 4
+        Google_TPU: 4
+        AWS_Trainium: 4
+        华为昇腾: 3
+        寒武纪: 3
+    - factor: 国内可获得性
+      vendors:
+        NVIDIA: 2
+        AMD: 2
+        Intel: 2
+        Google_TPU: 1
+        AWS_Trainium: 1
+        华为昇腾: 5
+        寒武纪: 5

@@ -1,0 +1,5 @@
+# Runtime worktrees created by isolation: worktree agents
+.claude/worktrees/
+
+# Runtime workspace / 决策缓存 / 日志（每次跑产生，不入库）
+.agent-team/

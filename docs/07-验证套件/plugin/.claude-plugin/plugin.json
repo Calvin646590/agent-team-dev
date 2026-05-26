@@ -1,0 +1,5 @@
+{
+  "name": "agent-team-c-validation",
+  "version": "0.0.6",
+  "description": "验证套件：C'/V-4~V-11 + V-12 worktree并发同步 + V-13 hook身份识别（集成验证）"
+}

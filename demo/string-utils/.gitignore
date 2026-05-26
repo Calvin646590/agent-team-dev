@@ -1,0 +1,4 @@
+# agent-team 运行时（每次跑产生，不入库）
+.agent-team/
+.claude/worktrees/
+node_modules/
