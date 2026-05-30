@@ -4,6 +4,21 @@ agent-team 插件版本历史。格式遵循 [Keep a Changelog](https://keepacha
 
 ---
 
+## [0.1.11] — 2026-05-29
+
+### Fixed（诚实复审，Opus）
+- **office 写前快照从 prompt 剧场改为真实 hook**（ADR-0049）：新增 `hooks/office-snapshot-guard.py`（PreToolUse 自动触发），覆盖既有文件前自动快照 + 记真实 ISO 时间戳，不再依赖 LLM 自觉。修复 v0.1.10 实测中"快照被报告成功却从未执行"（空目录 + 伪造时间戳 `20260526T000000`）
+- `skills/scheduler/SKILL.md` office 分支：移除手写 mkdir/cp 指令，改为说明由 hook 自动完成
+
+### Added
+- **场景测试机器可验证化**（ADR-0050）：`pressure-test/verify/` 两层校验（`verify.py` 交付物+真跑 vitest / `verify_mechanism.py` 防叙述造假 / `test_office_snapshot_hook.py` hook 自测），`run-all.sh` 退出码裁决
+- `docs/16-诚实复审报告-Opus.md`：取证式复审，区分"真实执行"与"LLM 叙述造假"
+
+### Changed
+- `docs/14-场景实测报告.md`：四场景 ✅ 按取证置信度重标（高/高/中/中），不再等同对待
+
+---
+
 ## [0.1.10] — 2026-05-26
 
 ### Added
