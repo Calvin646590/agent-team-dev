@@ -4,6 +4,23 @@ agent-team 插件版本历史。格式遵循 [Keep a Changelog](https://keepacha
 
 ---
 
+## [0.1.12] — 2026-05-29
+
+### Fixed（诚实复审 item 3/4/5）
+- **删装饰性机制**（ADR-0051）：retry 移除虚构的"指数退避 5/10/20s"（无计时器），改为"立即重派+附 last_error，可显式 Bash sleep 真实等待"；Wave"自检"降格为"派发纪律"（发出前指令，非发出后验证）
+- **strict hook 修 worktree/子目录 fail-open**（ADR-0052）：`files-scope-guard.py` 新增 `find_project_root` 向上查找项目根，不再假设 cwd=项目根；strict 检测正则行首锚定（消化 P3-5）
+- **Merger 加独立校验**（ADR-0053）：merger.md step 3 改为对整合结果真跑测试（development，退出码为准）/ outputs 存在性断言（content/research/office），不再全信 subagent 自报的 quality_gate
+
+### Added
+- `test_files_scope_hook.py`：strict hook 5 项真实自测（含 cwd=子目录用例锁定 ADR-0052 修复）
+- 插件 README 顶部"诚实声明"段（item 2）：明确 prompt 驱动本质，区分提示词层与真实 hook 强制层
+
+### Changed
+- `verify_mechanism.py`：接入 files-scope hook 自测为第 2 层一节
+- docs/16 进展表：item 1~6 全部完成
+
+---
+
 ## [0.1.11] — 2026-05-29
 
 ### Fixed（诚实复审，Opus）

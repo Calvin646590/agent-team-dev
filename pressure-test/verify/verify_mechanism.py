@@ -121,6 +121,23 @@ def check_log_authenticity(scenario, project_dir):
     return [ok(f"{scenario}: log.md 含 {real_ts} 条真实秒级时间戳")]
 
 
+def run_selftest(path, label):
+    """跑一个 hook 自测脚本，返回 (fail_bool, line)。"""
+    if not os.path.isfile(path):
+        return True, bad(f"{label}: 缺自测脚本 {os.path.basename(path)}")
+    try:
+        r = subprocess.run([sys.executable, path], capture_output=True, text=True, timeout=60)
+    except Exception as e:
+        return True, bad(f"{label}: 自测无法运行: {e}")
+    if r.returncode == 0:
+        return False, ok(f"{label}: 自测通过（exit 0）")
+    return True, bad(f"{label}: 自测失败 exit={r.returncode}\n{r.stdout.strip()}")
+
+
+SCOPE_SELFTEST = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                              "test_files_scope_hook.py")
+
+
 def main():
     print(f"{B}agent-team 编排机制完整性校验（防叙述造假）{X}\n")
     any_fail = False
@@ -129,6 +146,12 @@ def main():
     fail, lines = check_office_snapshots()
     for l in lines:
         print(l)
+    any_fail = any_fail or fail
+    print()
+
+    print(f"{B}■ strict 文件域强制（真实 hook 代码，含 worktree/子目录 fail-open 修复）{X}")
+    fail, line = run_selftest(SCOPE_SELFTEST, "files-scope-guard")
+    print("  " + line)
     any_fail = any_fail or fail
     print()
 
