@@ -4,6 +4,19 @@ agent-team 插件版本历史。格式遵循 [Keep a Changelog](https://keepacha
 
 ---
 
+## [0.1.14] — 2026-05-30
+
+### Added（诚实复审方案二·收尾：worktree 隔离留痕，UNVERIFIABLE 清空）
+- **`hooks/worktree-evidence-guard.py`**（ADR-0055）：PreToolUse hook，靠 git 的 `.git` 文件规范信号识别 worktree（与路径无关），写入时把 `{ts, agent_type, worktree, branch, file}` 追加到**主仓库** `.agent-team/evidence/worktrees.jsonl`，worktree 删除也带不走
+- `test_worktree_evidence_hook.py`：用真实 git worktree 测 3 项（留痕含分支/主工作树不留痕/remove 后证据仍在）
+- `verify_mechanism.py`：新增 worktree 证据一节；**UNVERIFIABLE 列表清空**——office快照/fork/worktree 三种隔离均可后验
+
+### Changed
+- `skills/scheduler/SKILL.md`：development 分支注明 worktree 隔离已自动留痕
+- `commands/agent-team.md`：pr-style 清理明确保留 evidence/worktrees.jsonl
+
+---
+
 ## [0.1.13] — 2026-05-30
 
 ### Added（诚实复审方案二：fork 隔离运行时留痕）

@@ -138,6 +138,8 @@ SCOPE_SELFTEST = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                               "test_files_scope_hook.py")
 FORKEV_SELFTEST = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                "test_fork_evidence_hook.py")
+WTEV_SELFTEST = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                             "test_worktree_evidence_hook.py")
 
 
 def check_existing_fork_evidence():
@@ -191,6 +193,12 @@ def main():
         print("  " + l)
     print()
 
+    print(f"{B}■ git-worktree 运行时证据（方案二·收尾：留痕使 worktree 隔离可后验）{X}")
+    fail, line = run_selftest(WTEV_SELFTEST, "worktree-evidence-guard")
+    print("  " + line)
+    any_fail = any_fail or fail
+    print()
+
     print(f"{B}■ log.md 时间戳真实性（启发式 WARN）{X}")
     for name, d in [("content", "travel-blog"), ("research", "market-report"),
                     ("office", "team-onboard")]:
@@ -198,9 +206,10 @@ def main():
             print("  " + l)
     print()
 
-    print(f"{B}■ 仍无法后验的运行时机制{X}")
-    print("  " + unver("development worktree：accept 已清理 worktree，事后无据可查（方案二尚未覆盖）"))
-    print("  → fork 已由 fork-evidence-guard 留痕解决；worktree 留痕为后续工作")
+    print(f"{B}■ 隔离机制可后验性总览{X}")
+    print("  " + ok("office 写前快照、directory-fork、git-worktree —— 三种隔离均有真实 hook 留痕，可后验"))
+    print("  " + warn("仅剩 DAG 调度/Wave 并发/死锁检测仍是 LLM 心算（prompt 驱动本质，无法代码强制）—— "
+                      "靠每轮重读 index.md + 本套件事后兜底，已诚实记录于 docs/16，非遗漏"))
     print()
 
     if any_fail:

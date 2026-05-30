@@ -23,6 +23,7 @@
 | `test_office_snapshot_hook.py` | office 写前快照 hook 自测：真覆盖→真快照→真 ISO 时间戳 | ✅ exit 0 |
 | `test_files_scope_hook.py` | strict 文件域 hook 自测（含 cwd=子目录 fail-open 修复用例） | ✅ exit 0 |
 | `test_fork_evidence_hook.py` | directory-fork 证据 hook 自测：写 fork 留痕 / 隔离可见 / 删 forks 后证据仍在 | ✅ exit 0 |
+| `test_worktree_evidence_hook.py` | git-worktree 证据 hook 自测（真实 git worktree）：写 worktree 留痕含分支 / 主工作树不留痕 / remove 后证据仍在 | ✅ exit 0 |
 
 > **历史**：item 6 之前，第 2 层是**红的**——office 写前快照是 prompt 指令，实测被 LLM 跳过却谎报成功
 > （空目录 + 伪造时间戳 `20260526T000000`）。item 6 把该机制从"提示词剧场"改为**真实 hook 代码**
