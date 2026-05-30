@@ -4,6 +4,19 @@ agent-team 插件版本历史。格式遵循 [Keep a Changelog](https://keepacha
 
 ---
 
+## [0.1.13] — 2026-05-30
+
+### Added（诚实复审方案二：fork 隔离运行时留痕）
+- **`hooks/fork-evidence-guard.py`**（ADR-0054）：PreToolUse hook，写入 `.agent-team/forks/<fork>/` 时自动把 `{ts, agent_type, fork, file}` 追加到 `.agent-team/evidence/forks.jsonl`。证据独立于 forks/，accept 删 fork 也带不走——directory-fork 隔离从此事后可验证
+- `test_fork_evidence_hook.py`：4 项真实自测（留痕/隔离可见/删 forks 后证据仍在/非 fork 不留痕）
+- `verify_mechanism.py`：新增 fork 证据一节（自测 + 既有证据校验）；UNVERIFIABLE 从 {fork,worktree} 缩为 {worktree}
+
+### Changed
+- `skills/scheduler/SKILL.md`：content/research 分支注明隔离已自动留痕
+- `commands/agent-team.md`：overlay 清理明确"只删 forks/，绝不 rm -rf .agent-team/"（保住 evidence/）
+
+---
+
 ## [0.1.12] — 2026-05-29
 
 ### Fixed（诚实复审 item 3/4/5）

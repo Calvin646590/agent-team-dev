@@ -136,6 +136,34 @@ def run_selftest(path, label):
 
 SCOPE_SELFTEST = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                               "test_files_scope_hook.py")
+FORKEV_SELFTEST = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                               "test_fork_evidence_hook.py")
+
+
+def check_existing_fork_evidence():
+    """核对已存在的 content/research 项目里的 fork 证据（如有）。
+    老的实测运行早于 evidence hook，没有证据是诚实的（非造假）——如实标注，不判负。
+    若有证据则校验：时间戳真实、fork 字段非空。"""
+    lines = []
+    for name, d in [("content", "travel-blog"), ("research", "market-report")]:
+        ev = os.path.join(PT_ROOT, d, ".agent-team", "evidence", "forks.jsonl")
+        if not os.path.exists(ev):
+            lines.append(warn(f"{name}({d}): 无 fork 证据 —— 本次实测早于 evidence hook（非造假；"
+                              f"重跑后即自动留痕）。机制本身已由上方自测背书"))
+            continue
+        try:
+            recs = [json.loads(l) for l in open(ev, encoding="utf-8") if l.strip()]
+        except Exception as e:
+            lines.append(bad(f"{name}: 证据文件损坏: {e}"))
+            continue
+        bad_ts = [r for r in recs if "T00:00:00" in r.get("ts", "")
+                  or not re.match(r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}", r.get("ts", ""))]
+        forks = {r.get("fork") for r in recs}
+        if bad_ts:
+            lines.append(bad(f"{name}: {len(bad_ts)} 条证据时间戳伪造/非法"))
+        else:
+            lines.append(ok(f"{name}: {len(recs)} 条 fork 证据，涉及 {len(forks)} 个 fork，时间戳均真实"))
+    return lines
 
 
 def main():
@@ -155,6 +183,14 @@ def main():
     any_fail = any_fail or fail
     print()
 
+    print(f"{B}■ directory-fork 运行时证据（方案二：留痕使 fork 隔离可后验）{X}")
+    fail, line = run_selftest(FORKEV_SELFTEST, "fork-evidence-guard")
+    print("  " + line)
+    any_fail = any_fail or fail
+    for l in check_existing_fork_evidence():
+        print("  " + l)
+    print()
+
     print(f"{B}■ log.md 时间戳真实性（启发式 WARN）{X}")
     for name, d in [("content", "travel-blog"), ("research", "market-report"),
                     ("office", "team-onboard")]:
@@ -162,10 +198,9 @@ def main():
             print("  " + l)
     print()
 
-    print(f"{B}■ 运行时机制（accept 后痕迹已清，无法后验）{X}")
-    print("  " + unver("content/research directory-fork：overlay accept 已删 forks/，事后无据可查"))
-    print("  " + unver("development worktree：accept 已清理 worktree，事后无据可查"))
-    print("  → 这些场景如需可信证据，必须在运行当时归档 forks// worktree 列表，不能事后补证")
+    print(f"{B}■ 仍无法后验的运行时机制{X}")
+    print("  " + unver("development worktree：accept 已清理 worktree，事后无据可查（方案二尚未覆盖）"))
+    print("  → fork 已由 fork-evidence-guard 留痕解决；worktree 留痕为后续工作")
     print()
 
     if any_fail:

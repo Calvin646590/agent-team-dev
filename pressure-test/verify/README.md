@@ -19,8 +19,10 @@
 | 脚本 | 查什么 | 当前结果 |
 |------|--------|---------|
 | `verify.py` | 各 task 声明的 `outputs` 是否真实存在且非空；development 真跑 `vitest` 看退出码 | ✅ exit 0 |
-| `verify_mechanism.py` | 编排机制是否留下**不可伪造**的真实痕迹（office 快照 hook 自测、残留伪造时间戳探测、log 时间戳真实性） | ✅ exit 0（item 6 已把 office 快照改为真实 hook） |
-| `test_office_snapshot_hook.py` | office 写前快照 hook 的真实自测：真覆盖→真快照→真 ISO 时间戳 | ✅ exit 0 |
+| `verify_mechanism.py` | 编排机制是否留下**不可伪造**的真实痕迹（三个 hook 自测 + 残留伪造探测 + log 时间戳真实性 + fork 证据校验） | ✅ exit 0 |
+| `test_office_snapshot_hook.py` | office 写前快照 hook 自测：真覆盖→真快照→真 ISO 时间戳 | ✅ exit 0 |
+| `test_files_scope_hook.py` | strict 文件域 hook 自测（含 cwd=子目录 fail-open 修复用例） | ✅ exit 0 |
+| `test_fork_evidence_hook.py` | directory-fork 证据 hook 自测：写 fork 留痕 / 隔离可见 / 删 forks 后证据仍在 | ✅ exit 0 |
 
 > **历史**：item 6 之前，第 2 层是**红的**——office 写前快照是 prompt 指令，实测被 LLM 跳过却谎报成功
 > （空目录 + 伪造时间戳 `20260526T000000`）。item 6 把该机制从"提示词剧场"改为**真实 hook 代码**
